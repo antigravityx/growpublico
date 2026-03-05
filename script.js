@@ -50,8 +50,8 @@ async function sha256(str) {
 }
 
 async function handleLogin() {
-    const user = document.getElementById('user').value;
-    const pass = document.getElementById('pass').value;
+    const user = document.getElementById('user').value.trim();
+    const pass = document.getElementById('pass').value.trim();
     const error = document.getElementById('error');
 
     if (!systemData) {
@@ -61,18 +61,13 @@ async function handleLogin() {
 
     const session = systemData.sesion;
     const inputHash = await sha256(pass);
+    const cleanUser = user.toLowerCase();
+    const cleanSessionUser = session.usuario.trim().toLowerCase();
 
-    console.log("DEBUG_ADN:", {
-        inputUser: user,
-        sessionUser: session.usuario,
-        matchUser: user === session.usuario,
-        matchHash: inputHash === session.pase_adn_sha256
-    });
-
-    if (user === session.usuario && inputHash === session.pase_adn_sha256) {
+    if (cleanUser === cleanSessionUser && inputHash === session.pase_adn_sha256) {
         error.innerText = "ADN VALIDADO. ACCEDIENDO...";
         localStorage.setItem('nexus_zero_auth', 'true');
-        setTimeout(() => startDashboard(user), 1000);
+        setTimeout(() => startDashboard(user), 800);
     } else {
         error.innerText = "FALLO ADN: ACCESO DENEGADO.";
     }
