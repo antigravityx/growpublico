@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#020617">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    <title>PULSE NEXUS — Zero</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="security-gate">
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="main-container">
+        <!-- Vista 1: Puerta de Entrada -->
+        <section id="gate-view" class="view flex-center pulse-entrance">
+            <div class="logo-group">
+                <h1 class="logo-main">PULSE<span>NEXUS</span></h1>
+                <p class="logo-sub">MODO SÚPER ADMINISTRADOR</p>
+            </div>
+            <div class="action-list">
+                <button class="btn-zero primary" onclick="showView('login-view')">
+                    <span class="icon">🔑</span>
+                    <div class="label">
+                        <strong>ACCEDER AL NÚCLEO</strong>
+                        <span>Validación ADN Requerida</span>
+                    </div>
+                </button>
+                <button class="btn-zero" onclick="alert('Registro bloqueado: Requiere terminal física.')">
+                    <span class="icon">👤</span>
+                    <div class="label">
+                        <strong>NUEVO OPERADOR</strong>
+                        <span>Registro de Personal</span>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Vista 2: Login DNA -->
+        <section id="login-view" class="view flex-center hidden">
+            <div class="login-box glass">
+                <h2>IDENTIDAD ADN</h2>
+                <div class="input-group">
+                    <label>USUARIO</label>
+                    <input type="text" id="user" placeholder="_" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>PASE ADN</label>
+                    <input type="password" id="pass" placeholder="_" autocomplete="off">
+                </div>
+                <button class="btn-login" id="login-btn">EJECUTAR_ACCESO</button>
+                <p id="error" class="error-msg"></p>
+                <button class="btn-text" onclick="showView('gate-view')">CANCELAR_SECUENCIA</button>
+            </div>
+        </section>
+
+        <!-- Vista 3: Admin Dashboard -->
+        <section id="admin-view" class="view hidden">
+            <header class="admin-header">
+                <div class="status-bar">
+                    <span class="status-dot"></span>
+                    <span id="admin-name">ADMIN: Cargando...</span>
+                </div>
+                <button class="btn-logout" id="logout-btn">SALIR</button>
+            </header>
+
+            <div class="card-grid">
+                <!-- Cards se cargan dinámicamente -->
+            </div>
+
+            <div class="console-box glass">
+                <div class="console-header">NEXO_LOGS [Real-Time]</div>
+                <ul id="console-output"></ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

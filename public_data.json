@@ -1,0 +1,15 @@
+{
+    "sesion": {
+        "usuario": "eyego",
+        "pase_adn_sha256": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    },
+    "stock": [],
+    "mensajes": [
+        {
+            "fecha": "2026-03-05",
+            "mensaje": "SISTEMA NEXUS ZERO ACTIVADO: NÚCLEO INICIALIZADO."
+        }
+    ],
+    "memoria_errores": [],
+    "capsulas_alma": []
+}
