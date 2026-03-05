@@ -62,6 +62,13 @@ async function handleLogin() {
     const session = systemData.sesion;
     const inputHash = await sha256(pass);
 
+    console.log("DEBUG_ADN:", {
+        inputUser: user,
+        sessionUser: session.usuario,
+        matchUser: user === session.usuario,
+        matchHash: inputHash === session.pase_adn_sha256
+    });
+
     if (user === session.usuario && inputHash === session.pase_adn_sha256) {
         error.innerText = "ADN VALIDADO. ACCEDIENDO...";
         localStorage.setItem('nexus_zero_auth', 'true');
