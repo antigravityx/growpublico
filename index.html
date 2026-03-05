@@ -65,8 +65,14 @@
             </div>
 
             <div class="console-box glass">
-                <div class="console-header">NEXO_LOGS [Real-Time]</div>
-                <ul id="console-output"></ul>
+                <div class="console-header">NEXO_LOGS [Interactive_Terminal]</div>
+                <div id="terminal-screen" class="terminal-screen">
+                    <ul id="console-output"></ul>
+                    <div class="input-line">
+                        <span class="prompt">>></span>
+                        <input type="text" id="terminal-input" placeholder="..." autocomplete="off">
+                    </div>
+                </div>
             </div>
         </section>
     </div>

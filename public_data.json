@@ -7,9 +7,16 @@
     "mensajes": [
         {
             "fecha": "2026-03-05",
-            "mensaje": "SISTEMA NEXUS ZERO ACTIVADO: NÚCLEO INICIALIZADO."
+            "mensaje": "SISTEMA NEXUS ZERO ACTIVADO: N\u00daCLEO INICIALIZADO."
         }
     ],
     "memoria_errores": [],
-    "capsulas_alma": []
+    "capsulas_alma": [],
+    "links": [
+        {
+            "slug": "verix-repo",
+            "target": "https://github.com/antigravityx",
+            "created_at": "2026-03-05T20:41:53-03:00"
+        }
+    ]
 }

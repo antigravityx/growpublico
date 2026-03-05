@@ -95,6 +95,7 @@ function renderCards() {
     const modules = [
         { id: 'personal', title: 'GESTIÓN OPERADORES', icon: '👤', desc: 'Crear nuevos trabajadores y roles.' },
         { id: 'stock', title: 'LOGÍSTICA STOCK', icon: '📦', desc: 'Inventario real-time y productos.' },
+        { id: 'links', title: 'MICROSERVICIO ENLACES', icon: '🔗', desc: 'Acortador y rutas seguras.' },
         { id: 'sec', title: 'SEGURIDAD CORE', icon: '🛡️', desc: 'Control de firewall y accesos.' },
         { id: 'soul', title: 'CÁPSULAS ALMA', icon: '🌌', desc: 'Conocimiento inyectado.' }
     ];
@@ -106,12 +107,35 @@ function renderCards() {
         div.onclick = () => {
             if (m.id === 'personal') {
                 alert("CARGANDO PANEL DE RECLUTAMIENTO...\nSolo tú, Súper Admin, podés ver esto.");
+            } else if (m.id === 'links') {
+                showLinksPanel();
             } else {
                 alert(`EJECUTANDO MÓDULO: ${m.title}`);
             }
         };
         grid.appendChild(div);
     });
+}
+
+function showLinksPanel() {
+    const list = systemData.links || [];
+    let html = `
+        <div class="links-panel glass">
+            <h3>GESTIÓN DE RUTAS SEGURAS</h3>
+            <div class="links-list">
+                ${list.map(l => `
+                    <div class="link-item">
+                        <span class="slug">/s/${l.slug}</span>
+                        <span class="target">${l.target}</span>
+                        <button onclick="navigator.clipboard.writeText(window.location.host + '/s/${l.slug}')">COPIAR</button>
+                    </div>
+                `).join('')}
+            </div>
+            <p class="note">Para crear nuevos, ejecuta link_shortener.py con tu URL destino.</p>
+            <button class="btn-text" onclick="renderCards()">VOLVER</button>
+        </div>
+    `;
+    document.querySelector('.card-grid').innerHTML = html;
 }
 
 function renderLogs() {
@@ -123,6 +147,51 @@ function renderLogs() {
         li.innerText = l.mensaje || `${l.contexto}: ${l.error}`;
         out.appendChild(li);
     });
+    // Scroll to bottom
+    const screen = document.getElementById('terminal-screen');
+    if (screen) screen.scrollTop = screen.scrollHeight;
+}
+
+function executeCommand(cmd) {
+    const out = document.getElementById('console-output');
+    const li = document.createElement('li');
+    li.innerHTML = `<span style="opacity:0.5">>></span> ${cmd}`;
+    out.appendChild(li);
+
+    const parts = cmd.toLowerCase().split(' ');
+    const command = parts[0];
+
+    switch (command) {
+        case 'help':
+            addLog("COMANDOS: help, clear, status, links, soul");
+            break;
+        case 'clear':
+            out.innerHTML = '';
+            addLog("TERMINAL REINICIALIZADA.");
+            break;
+        case 'status':
+            addLog("SISTEMA: ONLINE | ADN: VALIDADO | RECEPTOR: ACTIVO");
+            break;
+        case 'links':
+            showLinksPanel();
+            addLog("MÓDULO ENLACES ABIERTO.");
+            break;
+        case 'soul':
+            alert("SINTONIZANDO CÁPSULAS DE ALMA...");
+            addLog("ALMA: EN FRECUENCIA.");
+            break;
+        default:
+            addLog(`ERROR: COMANDO '${command}' NO RECONOCIDO.`);
+    }
+}
+
+function addLog(msg) {
+    const out = document.getElementById('console-output');
+    const li = document.createElement('li');
+    li.innerText = msg;
+    out.appendChild(li);
+    const screen = document.getElementById('terminal-screen');
+    if (screen) screen.scrollTop = screen.scrollHeight;
 }
 
 // Initialization
@@ -130,6 +199,19 @@ window.addEventListener('load', () => {
     initCanvas();
     loadSystem();
     document.getElementById('login-btn').addEventListener('click', handleLogin);
+
+    // Terminal Keyboard Logic
+    const terminalInput = document.getElementById('terminal-input');
+    if (terminalInput) {
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = terminalInput.value.trim();
+                if (cmd) executeCommand(cmd);
+                terminalInput.value = '';
+            }
+        });
+    }
+
     document.getElementById('logout-btn').addEventListener('click', () => {
         localStorage.removeItem('nexus_zero_auth');
         location.reload();
