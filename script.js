@@ -91,7 +91,7 @@ function renderCards() {
     const grid = document.querySelector('.card-grid');
     grid.innerHTML = '';
     const modules = [
-        { id: 'personal', title: 'GESTIÓN PERSONAL', icon: '👥', desc: 'Control de operadores y roles.' },
+        { id: 'personal', title: 'GESTIÓN OPERADORES', icon: '👤', desc: 'Crear nuevos trabajadores y roles.' },
         { id: 'stock', title: 'LOGÍSTICA STOCK', icon: '📦', desc: 'Inventario real-time y productos.' },
         { id: 'sec', title: 'SEGURIDAD CORE', icon: '🛡️', desc: 'Control de firewall y accesos.' },
         { id: 'soul', title: 'CÁPSULAS ALMA', icon: '🌌', desc: 'Conocimiento inyectado.' }
@@ -101,7 +101,13 @@ function renderCards() {
         const div = document.createElement('div');
         div.className = 'btn-zero';
         div.innerHTML = `<span class="icon">${m.icon}</span><div class="label"><strong>${m.title}</strong><span>${m.desc}</span></div>`;
-        div.onclick = () => alert(`EJECUTANDO MÓDULO: ${m.title}`);
+        div.onclick = () => {
+            if (m.id === 'personal') {
+                alert("CARGANDO PANEL DE RECLUTAMIENTO...\nSolo tú, Súper Admin, podés ver esto.");
+            } else {
+                alert(`EJECUTANDO MÓDULO: ${m.title}`);
+            }
+        };
         grid.appendChild(div);
     });
 }

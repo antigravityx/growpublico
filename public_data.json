@@ -1,7 +1,7 @@
 {
     "sesion": {
-        "usuario": "eyego",
-        "pase_adn_sha256": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+        "usuario": "admin",
+        "pase_adn_sha256": "240be518fabd2724ddb6f04030113c5a0c469640856021e2713e7921319c5c2a"
     },
     "stock": [],
     "mensajes": [
